@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/Icons">
+        <file>Resources/AND.png</file>
+        <file>Resources/BUFFER.png</file>
+        <file>Resources/NAND.png</file>
+        <file>Resources/NOR.png</file>
+        <file>Resources/NOT.png</file>
+        <file>Resources/OR.png</file>
+        <file>Resources/XNOR.png</file>
+        <file>Resources/XOR.png</file>
+    </qresource>
+</RCC>
