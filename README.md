@@ -22,6 +22,7 @@
 
 	$`make -j 4`
 6.	**Run the executable:**
+
 	There should now be an executable file called `CircuitSimulator` in your
 	build folder. You can put it anywhere or run it with:
 	
