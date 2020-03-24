@@ -3,8 +3,8 @@
 1.	**Install dependencies:**
 	-	Qt base: `qt5-base`
 	-	QMake: `qt5-tools`
-	-	Compiler: `g++` (>= 7) or `clang` (>=5)
-	-	Note that your distro's package names  might vary. All provided package names are those used by Archlinux, the distro this is being tested on.
+	-	Compiler: `g++` or `clang`, must support C++ 11 or later
+	-	Note that your distro's package names  might vary. All provided package names are those used by Archlinux.
 2.	**Clone the repository and cd into it:**
 	$`git clone https://github.com/xypwn/circuit-logic-simulator.git`
 	$`cd circuit-logic-simulator`
@@ -22,3 +22,4 @@
 ### Notes ###
 -	The software is currently under heavy development and therefore still crawling with bugs
 -	The `About` and `Tutorial` menu item haven't yet been implemented
+-	Although some icons are missing, you can hover over an item to see what it does
