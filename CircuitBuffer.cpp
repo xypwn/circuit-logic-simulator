@@ -35,8 +35,8 @@ void CircuitBuffer::addFromScene(const QList<Part*> &parts, const QList<Wire*>& 
     }
     for(auto wire : wires)
     {
-        auto wireInputPart = (Part*)wire->m_connectorInput->parentItem();
-        auto wireOutputPart = (Part*)wire->m_connectorOutput->parentItem();
+        auto wireInputPart = wire->m_connectorInput->parentPart();
+        auto wireOutputPart = wire->m_connectorOutput->parentPart();
 
         // Create wireData
         WireData wireData;

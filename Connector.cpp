@@ -17,6 +17,11 @@ Connector::Connector(Scene* scene, Part *parentPart, ConnectorType::ConnectorTyp
     setFlag(QGraphicsItem::ItemSendsScenePositionChanges);
 }
 
+Part* Connector::parentPart()
+{
+    return (Part*)parentItem();
+}
+
 QRectF Connector::boundingRect() const
 {
     if(m_connectorType == ConnectorType::Output)

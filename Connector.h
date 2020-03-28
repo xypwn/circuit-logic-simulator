@@ -9,7 +9,7 @@ class Part;
 class Wire;
 class Scene;
 
-class Connector : public QGraphicsItem
+class Connector : private QGraphicsItem
 {
 public:
     friend class Scene;
@@ -23,6 +23,8 @@ public:
     friend class MainWindow;
 
     Connector(Scene* scene, Part *parentPart, ConnectorType::ConnectorType side);
+
+    Part* parentPart();
 
     QRectF boundingRect() const override; // For drawing
     QPainterPath shape() const override; // For selection ("Hitbox")

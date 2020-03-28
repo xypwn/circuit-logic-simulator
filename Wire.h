@@ -6,7 +6,7 @@
 class Connector;
 class Scene;
 
-class Wire : public QGraphicsLineItem
+class Wire : private QGraphicsLineItem
 {
 public:
     friend class Connector;

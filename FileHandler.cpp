@@ -52,8 +52,8 @@ bool FileHandler::save(QString filename)
     fOut << "[wires]\n";
     for(auto wire : m_logic->m_wires)
     {
-        auto wireInputPart = (Part*)wire->m_connectorInput->parentItem();
-        auto wireOutputPart = (Part*)wire->m_connectorOutput->parentItem();
+        auto wireInputPart = wire->m_connectorInput->parentPart();
+        auto wireOutputPart = wire->m_connectorOutput->parentPart();
 
         fOut << wireInputPart << " " << wireInputPart->m_outputs.indexOf(wire->m_connectorInput) << " " << wireOutputPart << " " << wireOutputPart->m_inputs.indexOf(wire->m_connectorOutput) << "\n";
     }

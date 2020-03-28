@@ -9,7 +9,7 @@
 class Connector;
 class Logic;
 
-class Part : public QGraphicsItem
+class Part : protected QGraphicsItem
 {
 public:
     friend class Connector;
@@ -17,6 +17,7 @@ public:
     friend class Logic;
     friend class AddPart;
     friend class RemoveParts;
+    friend class AddWire;
     friend class RemoveWire;
     friend class CopyParts;
 
@@ -44,6 +45,9 @@ public:
     Part(Logic* logic, CircuitItemBaseShape baseShape = RoundedRect);
 
     PartType::PartType partType();
+
+    QPointF getPos() const;
+    void setPos(QPointF pos);
 
     void addInputs(int amount);
     void addOutputs(int amount);

@@ -34,6 +34,16 @@ PartType::PartType Part::partType()
     return m_partType;
 }
 
+QPointF Part::getPos() const
+{
+    return pos();
+}
+
+void Part::setPos(QPointF pos)
+{
+    QGraphicsItem::setPos(pos);
+}
+
 void Part::addInputs(int amount)
 {
     for(int i = 0; i < amount; i++)
