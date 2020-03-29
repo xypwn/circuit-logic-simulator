@@ -14,8 +14,6 @@ RemoveParts::RemoveParts(Scene* scene, const QList<Part*>& parts)
 
 RemoveParts::~RemoveParts()
 {
-    for(auto part : m_parts)
-        m_scene->m_logic->deletePart(part);
     delete m_wireUndoStack;
 }
 

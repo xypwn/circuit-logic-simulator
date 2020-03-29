@@ -19,10 +19,6 @@ public:
 private:  
     Scene* m_scene;
     Wire* m_wire;
-    Part* m_wireInputPart;
-    int m_wireInputConnectorIdx;
-    Part* m_wireOutputPart;
-    int m_wireOutputConnectorIdx;
 };
 
 #endif // REMOVEWIRE_H

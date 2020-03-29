@@ -169,11 +169,35 @@ void Scene::stopTrackingPart(Part* part)
     // Remove part from tracker list
     m_logic->m_parts.removeOne(part);
     for(auto input : part->m_inputs)
-        // Add connector from tracker list
+        // Remove connector from tracker list
         m_logic->m_inputConnectors.removeOne(input);
     for(auto output : part->m_outputs)
-        // Add connector from tracker list
+        // Remove connector from tracker list
         m_logic->m_outputConnectors.removeOne(output);
+}
+
+void Scene::startTrackingWire(Wire* wire)
+{
+    // Show wire
+    wire->show();
+    // Add wire back into tracker list
+    m_logic->m_wires.append(wire);
+    // Add wire back into it's input connector's wire list
+    wire->m_connectorInput->m_wires.append(wire);
+    // Add wire back into it's input connector's wire list
+    wire->m_connectorOutput->m_wires.append(wire);
+}
+
+void Scene::stopTrackingWire(Wire* wire)
+{
+    // Hide wire
+    wire->hide();
+    // Remove wire from tracker list
+    m_logic->m_wires.removeOne(wire);
+    // Remove wire from it's input connector's wire list
+    wire->m_connectorInput->m_wires.removeOne(wire);
+    // Remove wire from it's output connector's wire list
+    wire->m_connectorOutput->m_wires.removeOne(wire);
 }
 
 void Scene::connectorClicked(Connector *connector)

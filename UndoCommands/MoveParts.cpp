@@ -19,7 +19,7 @@ void MoveParts::redo()
     else
     {
         for(auto part : m_parts)
-            part->moveBy(m_relPos.x(), m_relPos.y());
+            part->setPos(part->getPos() + m_relPos);
     }
 }
 
@@ -27,5 +27,5 @@ void MoveParts::redo()
 void MoveParts::undo()
 {
     for(auto part : m_parts)
-        part->moveBy(-m_relPos.x(), -m_relPos.y());
+        part->setPos(part->getPos() - m_relPos);
 }

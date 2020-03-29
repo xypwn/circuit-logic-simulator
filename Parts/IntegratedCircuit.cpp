@@ -5,8 +5,8 @@
 #include "ToggleButton.h"
 #include "LightBulb.h"
 
-static bool compareToggleButtons(const ToggleButton* a, const ToggleButton* b) { return a->y() < b->y(); }
-static bool compareLightBulbs(const LightBulb* a, const LightBulb* b) { return a->y() < b->y(); }
+static bool compareToggleButtons(const ToggleButton* a, const ToggleButton* b) { return a->getPos().y() < b->getPos().y(); }
+static bool compareLightBulbs(const LightBulb* a, const LightBulb* b) { return a->getPos().y() < b->getPos().y(); }
 
 IntegratedCircuit::IntegratedCircuit(Logic* logic, QString filename)
     :Part(logic), m_filename(filename), m_icLogic(new Logic)

@@ -6,6 +6,7 @@
 class Scene;
 class Wire;
 class Connector;
+class Part;
 
 class AddWire : public QUndoCommand
 {
@@ -18,7 +19,7 @@ public:
 
 private:
     Scene* m_scene;
-    Wire* m_wire;
+    Wire* m_wire = nullptr;
     Connector* m_connectorInput;
     Connector* m_connectorOutput;
 };

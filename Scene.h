@@ -84,6 +84,9 @@ private:
     void startTrackingPart(Part* part);
     void stopTrackingPart(Part* part);
 
+    void startTrackingWire(Wire* wire);
+    void stopTrackingWire(Wire* wire);
+
     // Called by Connector when it is clicked, for example when creating or deleting wires
     void connectorClicked(Connector *connector);
     // Removal is done undoably
