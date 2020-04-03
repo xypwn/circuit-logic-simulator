@@ -188,7 +188,8 @@ void MainWindow::closeEvent(QCloseEvent *event)
             fileSave();
             if(!unsavedChanges)
                 event->accept();
-            event->ignore();
+            else
+                event->ignore();
             break;
         case QMessageBox::Discard:
             event->accept();

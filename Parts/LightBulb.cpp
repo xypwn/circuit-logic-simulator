@@ -7,6 +7,7 @@ LightBulb::LightBulb(Logic* logic)
 {
     addInputs(1);
     addOutputs(0);
+    setLabel("Light Bulb");
     recalculateLayout();
     m_brushColorNormal = Qt::GlobalColor::black;
     m_brushColorSelected = Qt::GlobalColor::black;

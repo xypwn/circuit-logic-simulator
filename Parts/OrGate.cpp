@@ -7,6 +7,7 @@ OrGate::OrGate(Logic* logic)
 {
     addInputs(2);
     addOutputs(1);
+    setLabel("Or Gate");
     recalculateLayout();
 }
 

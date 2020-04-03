@@ -1,7 +1,10 @@
 #include "IntegratedCircuit.h"
 
+#include <QFileInfo>
+
 #include "../Scene.h"
 #include "../Logic.h"
+#include "../Connector.h"
 #include "ToggleButton.h"
 #include "LightBulb.h"
 
@@ -30,7 +33,14 @@ IntegratedCircuit::IntegratedCircuit(Logic* logic, QString filename)
     std::sort(m_icLogicInputs.begin(), m_icLogicInputs.end(), compareToggleButtons);
     std::sort(m_icLogicOutputs.begin(), m_icLogicOutputs.end(), compareLightBulbs);
 
+    setLabel(QFileInfo(m_filename).fileName());
     recalculateLayout();
+
+    // Give all connectors labels according to those of the buttons/lamps of the IC logic
+    for(int i = 0; i < m_inputs.length(); i++)
+        m_inputs[i]->setLabel(m_icLogicInputs[i]->label());
+    for(int i = 0; i < m_outputs.length(); i++)
+        m_outputs[i]->setLabel(m_icLogicOutputs[i]->label());
 }
 
 QString IntegratedCircuit::filename()

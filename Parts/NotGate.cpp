@@ -7,6 +7,7 @@ NotGate::NotGate(Logic* logic)
 {
     addInputs(1);
     addOutputs(1);
+    setLabel("Not Gate");
     recalculateLayout();
 }
 

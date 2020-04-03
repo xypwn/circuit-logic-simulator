@@ -328,16 +328,6 @@
       </widget>
      </widget>
     </item>
-    <item row="0" column="0">
-     <widget class="QGraphicsView" name="graphicsView">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="1">
      <widget class="QGroupBox" name="groupBox">
       <property name="sizePolicy">
@@ -405,6 +395,16 @@
         </widget>
        </item>
       </layout>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QGraphicsView" name="graphicsView">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
      </widget>
     </item>
    </layout>
@@ -481,9 +481,9 @@
    <addaction name="menuSimulation"/>
    <addaction name="menuHelp"/>
   </widget>
-  <widget class="QToolBar" name="toolBarTop">
+  <widget class="QToolBar" name="toolBarFile">
    <property name="windowTitle">
-    <string>toolBar</string>
+    <string>File Actions</string>
    </property>
    <property name="movable">
     <bool>true</bool>
@@ -504,31 +504,10 @@
    <addaction name="actionOpen"/>
    <addaction name="actionSave"/>
    <addaction name="actionSave_As"/>
-   <addaction name="separator"/>
-   <addaction name="actionUndo"/>
-   <addaction name="actionRedo"/>
-   <addaction name="separator"/>
-   <addaction name="actionCut"/>
-   <addaction name="actionCopy"/>
-   <addaction name="actionPaste"/>
-   <addaction name="actionDelete"/>
-   <addaction name="separator"/>
-   <addaction name="actionZoom_In"/>
-   <addaction name="actionZoom_Out"/>
-   <addaction name="actionReset_Zoom"/>
-   <addaction name="separator"/>
-   <addaction name="actionConnect"/>
-   <addaction name="actionRemove_Connections"/>
-   <addaction name="actionSelect"/>
-   <addaction name="actionPan"/>
-   <addaction name="separator"/>
-   <addaction name="actionStart"/>
-   <addaction name="actionStop"/>
-   <addaction name="actionStep"/>
   </widget>
   <widget class="QToolBar" name="toolBarBottom">
    <property name="windowTitle">
-    <string>toolBar_2</string>
+    <string>Add Parts</string>
    </property>
    <attribute name="toolBarArea">
     <enum>BottomToolBarArea</enum>
@@ -536,6 +515,77 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+  </widget>
+  <widget class="QToolBar" name="toolBarUndoRedo">
+   <property name="windowTitle">
+    <string>Undo/Redo</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionUndo"/>
+   <addaction name="actionRedo"/>
+  </widget>
+  <widget class="QToolBar" name="toolBarEdit">
+   <property name="windowTitle">
+    <string>Edit</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionCut"/>
+   <addaction name="actionCopy"/>
+   <addaction name="actionPaste"/>
+   <addaction name="actionDelete"/>
+  </widget>
+  <widget class="QToolBar" name="toolBarZoom">
+   <property name="windowTitle">
+    <string>Zoom</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionZoom_In"/>
+   <addaction name="actionZoom_Out"/>
+   <addaction name="actionReset_Zoom"/>
+  </widget>
+  <widget class="QToolBar" name="toolBarSelectTool">
+   <property name="windowTitle">
+    <string>Select Tool</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionConnect"/>
+   <addaction name="actionRemove_Connections"/>
+   <addaction name="actionSelect"/>
+   <addaction name="actionPan"/>
+  </widget>
+  <widget class="QToolBar" name="toolBarSimCtrl">
+   <property name="windowTitle">
+    <string>Simulation Controls</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionStart"/>
+   <addaction name="actionStop"/>
+   <addaction name="actionStep"/>
   </widget>
   <action name="actionOpen">
    <property name="icon">
@@ -597,7 +647,7 @@
     <string>Connect Parts</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+J</string>
+    <string>1</string>
    </property>
   </action>
   <action name="actionSelect">
@@ -612,7 +662,7 @@
     <string>Select</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+G</string>
+    <string>3</string>
    </property>
   </action>
   <action name="actionZoom_In">
@@ -624,7 +674,7 @@
     <string>Zoom In</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+8</string>
+    <string>I</string>
    </property>
   </action>
   <action name="actionZoom_Out">
@@ -636,7 +686,7 @@
     <string>Zoom Out</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+9</string>
+    <string>O</string>
    </property>
   </action>
   <action name="actionReset_Zoom">
@@ -648,7 +698,7 @@
     <string>Reset Zoom</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+0</string>
+    <string>U</string>
    </property>
   </action>
   <action name="actionPan">
@@ -663,7 +713,7 @@
     <string>Pan</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+H</string>
+    <string>4</string>
    </property>
   </action>
   <action name="actionUndo">
@@ -687,7 +737,7 @@
     <string>Redo</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Y</string>
+    <string>Ctrl+Shift+Z</string>
    </property>
   </action>
   <action name="actionCopy">
@@ -738,7 +788,7 @@
     <string>Remove Connections</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+U</string>
+    <string>2</string>
    </property>
   </action>
   <action name="actionDelete">
@@ -761,6 +811,9 @@
    <property name="text">
     <string>Start</string>
    </property>
+   <property name="shortcut">
+    <string>S</string>
+   </property>
   </action>
   <action name="actionStop">
    <property name="icon">
@@ -769,6 +822,9 @@
    </property>
    <property name="text">
     <string>Stop</string>
+   </property>
+   <property name="shortcut">
+    <string>E</string>
    </property>
   </action>
   <action name="actionStep">
@@ -782,6 +838,9 @@
    <property name="toolTip">
     <string>Step</string>
    </property>
+   <property name="shortcut">
+    <string>W</string>
+   </property>
   </action>
   <action name="actionToggle_Undo_View">
    <property name="icon">
@@ -793,6 +852,9 @@
    </property>
    <property name="toolTip">
     <string>Toggle Undo View</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
    </property>
   </action>
   <action name="actionTutorial">

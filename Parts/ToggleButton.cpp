@@ -7,6 +7,7 @@ ToggleButton::ToggleButton(Logic* logic)
 {
     addInputs(0);
     addOutputs(1);
+    setLabel("Toggle Button");
     recalculateLayout();
     m_brushColorNormal = Qt::GlobalColor::red;
     m_brushColorSelected = Qt::GlobalColor::red;
@@ -14,6 +15,7 @@ ToggleButton::ToggleButton(Logic* logic)
 
 QVector<bool> ToggleButton::compute(QVector<bool> inputs)
 {
+    Q_UNUSED(inputs)
     QVector<bool> ret(1);
     ret[0] = m_toggleState;
     return ret;

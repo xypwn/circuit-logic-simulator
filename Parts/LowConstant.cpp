@@ -7,6 +7,7 @@ LowConstant::LowConstant(Logic* logic)
 {
     addInputs(0);
     addOutputs(1);
+    setLabel("Low Constant");
     recalculateLayout();
     m_brushColorNormal = Qt::GlobalColor::black;
     m_brushColorSelected = Qt::GlobalColor::black;
@@ -14,6 +15,7 @@ LowConstant::LowConstant(Logic* logic)
 
 QVector<bool> LowConstant::compute(QVector<bool> inputs)
 {
+    Q_UNUSED(inputs)
     QVector<bool> ret(1);
     ret[0] = false;
     return ret;

@@ -7,6 +7,7 @@ XorGate::XorGate(Logic* logic)
 {
     addInputs(2);
     addOutputs(1);
+    setLabel("Xor Gate");
     recalculateLayout();
 }
 

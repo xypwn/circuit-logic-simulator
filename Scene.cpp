@@ -13,7 +13,6 @@
 #include "UndoCommands/MoveParts.h"
 #include "UndoCommands/RemoveParts.h"
 #include "UndoCommands/RemoveWire.h"
-//#include "UndoCommands/CopyParts.h"
 
 #include "FileHandler.h"
 
@@ -229,7 +228,7 @@ void Scene::connectorClicked(Connector *connector)
             }
         }
         else
-            //Same stuff here, but with connectorSelectedRight instead of connectorSelectedLeft
+        //Same here, but with connectorSelectedRight instead of connectorSelectedLeft
         {
             if(m_selectedOutputConnector == connector)
             {

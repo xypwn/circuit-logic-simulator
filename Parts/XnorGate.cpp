@@ -7,6 +7,7 @@ XnorGate::XnorGate(Logic* logic)
 {
     addInputs(2);
     addOutputs(1);
+    setLabel("Xnor Gate");
     recalculateLayout();
 }
 

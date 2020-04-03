@@ -7,6 +7,7 @@ NorGate::NorGate(Logic* logic)
 {
     addInputs(2);
     addOutputs(1);
+    setLabel("Nor Gate");
     recalculateLayout();
 }
 

@@ -3,11 +3,13 @@
 
 #include <QGraphicsItem>
 #include <QList>
+#include <QLineEdit>
 
 #include "ePartType.h"
 
 class Connector;
 class Logic;
+class Label;
 
 class Part : protected QGraphicsItem
 {
@@ -49,6 +51,9 @@ public:
     QPointF getPos() const;
     void setPos(QPointF pos);
 
+    void setLabel(QString text);
+    QString label() const;
+
     void addInputs(int amount);
     void addOutputs(int amount);
 
@@ -89,7 +94,9 @@ protected:
     int m_widthFactor;
 
 private:
-    // Updates all of the outputs using the inputs
+    // Updates all of the outputs using the inputs, called by Logic
     void updateState();
+
+    Label* m_label;
 };
 #endif // CIRCUITITEM_H

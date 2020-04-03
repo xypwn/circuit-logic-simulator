@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     CircuitBuffer.cpp \
+    Label.cpp \
     Logic.cpp \
     Parts/AndGate.cpp \
     Parts/BufferGate.cpp \
@@ -47,6 +48,7 @@ SOURCES += \
 
 HEADERS += \
     CircuitBuffer.h \
+    Label.h \
     Logic.h \
     Parts/AndGate.h \
     Parts/BufferGate.h \
@@ -73,6 +75,7 @@ HEADERS += \
     UndoCommands/RemoveParts.h \
     UndoCommands/RemoveWire.h \
     Wire.h \
+    eAlignMode.h \
     eConnectorType.h \
     ePartType.h
 

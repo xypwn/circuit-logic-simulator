@@ -7,6 +7,7 @@ NandGate::NandGate(Logic* logic)
 {
     addInputs(2);
     addOutputs(1);
+    setLabel("Nand Gate");
     recalculateLayout();
 }
 

@@ -6,6 +6,7 @@
 #include "Wire.h"
 #include "eConnectorType.h"
 #include "Scene.h"
+#include "Label.h"
 
 
 // PUBLIC
@@ -21,6 +22,30 @@ Part* Connector::parentPart()
 {
     return (Part*)parentItem();
 }
+
+void Connector::setLabel(const QString& text)
+{
+    if(m_label == nullptr)
+    {
+        m_label = new Label(this);
+        // If this Connector is on the left side of a Part
+        if(m_connectorType == ConnectorType::Input)
+            m_label->alignText(QPointF(0, 0), mkAlignMode(AlignMode::Left, AlignMode::VCenter));
+        // If this Connector is on the right side of a Part
+        else
+            m_label->alignText(QPointF(0, 0), mkAlignMode(AlignMode::Right, AlignMode::VCenter));
+    }
+    m_label->setText(text);
+}
+
+QString Connector::label() const
+{
+    if(m_label == nullptr)
+        return QString();
+    else
+        return m_label->text();
+}
+
 
 QRectF Connector::boundingRect() const
 {
@@ -42,6 +67,9 @@ QPainterPath Connector::shape() const
 
 void Connector::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    Q_UNUSED(option)
+    Q_UNUSED(widget)
+
     QPen pen = painter->pen();
     pen.setWidth(2);
     if(parentItem()->isSelected())
@@ -70,6 +98,7 @@ void Connector::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
 void Connector::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    Q_UNUSED(event)
     m_scene->connectorClicked(this);
 }
 

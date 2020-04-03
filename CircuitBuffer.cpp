@@ -17,7 +17,7 @@ void CircuitBuffer::addFromScene(const QList<Part*> &parts, const QList<Wire*>& 
 {
     // Maps the pointer of every given part to the corresponding pointer to an element in m_parts
     QMap<Part*, PartData*> partPtrToDataPtr;
-
+    // Add all parts into buffer as PartData
     for(auto part : parts)
     {
         // Create partData
@@ -33,6 +33,7 @@ void CircuitBuffer::addFromScene(const QList<Part*> &parts, const QList<Wire*>& 
         // Make it possible to find partData pointer with Part pointer
         partPtrToDataPtr.insert(part, &m_parts.last());
     }
+    // Add all wires into buffer as WireData
     for(auto wire : wires)
     {
         auto wireInputPart = wire->m_connectorInput->parentPart();
@@ -55,6 +56,7 @@ QPair<QList<Part*>, QList<Wire*>> CircuitBuffer::addIntoScene(Scene* scene, QPoi
 
     QMap<const PartData*, Part*> dataToAllocatedPart;
 
+    // Add all part data into scene as parts
     for(auto& partData : m_parts)
     {
         Part* part;
@@ -66,7 +68,7 @@ QPair<QList<Part*>, QList<Wire*>> CircuitBuffer::addIntoScene(Scene* scene, QPoi
 
         allocatedParts.append(part);
     }
-
+    // Add all wire data into scene as wires
     for(auto& wireData : m_wires)
     {
         // input and output are relative to the wire

@@ -7,6 +7,7 @@ HighConstant::HighConstant(Logic* logic)
 {
     addInputs(0);
     addOutputs(1);
+    setLabel("High Constant");
     recalculateLayout();
     m_brushColorNormal = Qt::GlobalColor::green;
     m_brushColorSelected = Qt::GlobalColor::green;
@@ -14,6 +15,7 @@ HighConstant::HighConstant(Logic* logic)
 
 QVector<bool> HighConstant::compute(QVector<bool> inputs)
 {
+    Q_UNUSED(inputs)
     QVector<bool> ret(1);
     ret[0] = true;
     return ret;

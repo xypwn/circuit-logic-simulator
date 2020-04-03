@@ -10,6 +10,7 @@
 #include "Connector.h"
 #include "Logic.h"
 #include "MainWindow.h"
+#include "Label.h"
 
 #include "Parts/IntegratedCircuit.h"
 
@@ -29,13 +30,11 @@ bool FileHandler::exists(QString filename)
 bool FileHandler::save(QString filename)
 {
     QFile file(filename);
-
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
         return false;
-
     QTextStream fOut(&file);
-
     fOut << "[parts]\n";
+    // Add each and it's data into the file
     for(auto part : m_logic->m_parts)
     {
         fOut << part << " " << part->m_partType << " " << part->pos().x() << " " << part->pos().y();
@@ -44,12 +43,16 @@ bool FileHandler::save(QString filename)
             // Strip out IC file path
             QFileInfo fileInfo(((IntegratedCircuit*)part)->filename());
             QString icFile(fileInfo.fileName());
-            fOut << " " << icFile;
+            // Write IC file name into file
+            fOut << " \"" << icFile << "\"";
         }
+        // Write label text into file
+        fOut << " \"" << part->m_label->text() << "\"";
         fOut << "\n";
     }
 
     fOut << "[wires]\n";
+    // Add each wire and it's data into the file
     for(auto wire : m_logic->m_wires)
     {
         auto wireInputPart = wire->m_connectorInput->parentPart();
@@ -77,7 +80,7 @@ bool FileHandler::open(QString filename)
 
     Sector currentSector;
 
-    // A .csim file stores all parts with IDs, this map simply keeps track of which ID was given which pointer
+    // A .csim file stores all parts with IDs, this map simply keeps track of which ID corresponds to which pointer
     QMap<QString, Part*> idPartPointerMap;
 
     while (!file.atEnd()) {
@@ -90,12 +93,18 @@ bool FileHandler::open(QString filename)
         {
             QVector<QString> words;
             QString currWord;
+            // If the parser is in between two double quotes ("")
+            bool parserInString = false;
             for(QChar c : line)
             {
-                if(c == QChar::Space)
+                if(c == QChar::Space && !parserInString)
                 {
                     words.append(currWord);
                     currWord.clear();
+                }
+                else if(c == '\"')
+                {
+                    parserInString = !parserInString;
                 }
                 else
                     currWord.append(c);
@@ -122,9 +131,13 @@ bool FileHandler::open(QString filename)
                         qFatal("Failed to open IC file: " + icFilename.toUtf8());
                     }
                     part = m_logic->createIC(icFilename, pos);
+                    part->setLabel(words[5]);
                 }
                 else
+                {
                     part = m_logic->createPart(type, pos);
+                    part->setLabel(words[4]);
+                }
                 idPartPointerMap.insert(words[0], part);
             }
             else

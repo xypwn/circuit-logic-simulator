@@ -8,6 +8,7 @@
 class Part;
 class Wire;
 class Scene;
+class Label;
 
 class Connector : private QGraphicsItem
 {
@@ -26,6 +27,9 @@ public:
 
     Part* parentPart();
 
+    void setLabel(const QString& text = QString());
+    QString label() const;
+
     QRectF boundingRect() const override; // For drawing
     QPainterPath shape() const override; // For selection ("Hitbox")
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
@@ -41,6 +45,8 @@ private:
     ConnectorType::ConnectorType m_connectorType;
     bool m_state = false;
     bool m_selected = false; // Separate from regular selection, for creating connections
+
+    Label* m_label = nullptr;
 
     void select(); // Called by MainWindow
     void unselect(); // Called by MainWindow

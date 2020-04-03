@@ -7,6 +7,7 @@ AndGate::AndGate(Logic* logic)
 {
     addInputs(2);
     addOutputs(1);
+    setLabel("And Gate");
     recalculateLayout();
 }
 

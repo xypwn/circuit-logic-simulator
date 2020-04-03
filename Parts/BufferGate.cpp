@@ -7,6 +7,7 @@ BufferGate::BufferGate(Logic* logic)
 {
     addInputs(1);
     addOutputs(1);
+    setLabel("Buffer Gate");
     recalculateLayout();
 }
 

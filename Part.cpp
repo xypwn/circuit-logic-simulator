@@ -5,28 +5,38 @@
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
 #include <QGraphicsSceneDragDropEvent>
-#include "Connector.h"
+#include <QLabel>
+#include <QGraphicsProxyWidget>
+
+#include "eAlignMode.h"
 #include "eConnectorType.h"
+#include "Connector.h"
 #include "MainWindow.h"
 #include "Scene.h"
 #include "Logic.h"
+#include "Label.h"
+
+#include <QDebug>
 
 // PUBLIC
 Part::Part(Logic* logic, CircuitItemBaseShape baseShape)
     :m_logic(logic), m_baseShape(baseShape)
 {
     // Set flags
-    setFlag(QGraphicsItem::ItemIsMovable);
-    setFlag(QGraphicsItem::ItemIsSelectable);
-    setFlag(QGraphicsItem::ItemSendsScenePositionChanges);
+    setFlags(QGraphicsItem::ItemIsMovable |
+             QGraphicsItem::ItemIsSelectable |
+             QGraphicsItem::ItemSendsScenePositionChanges);
     // Set default colors
     m_penColorNormal=Qt::GlobalColor::color1;
-    m_penColorSelected=Qt::GlobalColor::color0;
+    m_penColorSelected=Qt::GlobalColor::darkGray;
     m_penColorSymbol=Qt::GlobalColor::white;
     m_brushColorNormal=Qt::GlobalColor::blue;
     m_brushColorSelected=Qt::GlobalColor::blue;
     // Set default width factor (actual width = 20 * width factor)
     setWidth(2);
+    // Initialize label
+    m_label = new Label(this);
+    m_label->setEditable(true);
 }
 
 PartType::PartType Part::partType()
@@ -42,6 +52,16 @@ QPointF Part::getPos() const
 void Part::setPos(QPointF pos)
 {
     QGraphicsItem::setPos(pos);
+}
+
+void Part::setLabel(QString text)
+{
+    m_label->setText(text);
+}
+
+QString Part::label() const
+{
+    return m_label->text();
 }
 
 void Part::addInputs(int amount)
@@ -71,6 +91,9 @@ void Part::setWidth(int factor)
 
 void Part::recalculateLayout()
 {
+    // Return if the part isn't in any scene
+    if(m_logic->parentScene() == nullptr)
+        return;
     // Add inputs and outputs and position them correctly
     int yOffsetInputs;
     int yOffsetOutputs;
@@ -100,6 +123,16 @@ void Part::recalculateLayout()
     {
         m_outputs[i]->setPos(20 * m_widthFactor, yOffsetOutputs + 20 * i);
     }
+
+    // Position and scale label correctly
+    int maxConnections = qMax(m_inputs.length(), m_outputs.length());
+    qreal partHeight;
+    if(m_baseShape == RoundedRect)
+        partHeight = 20 * maxConnections;
+    else
+        partHeight = 40 * maxConnections;
+    // Center text relative to part's center
+    m_label->alignText(QPointF(m_widthFactor * 10, partHeight), mkAlignMode(AlignMode::HCenter, AlignMode::Top));
 }
 
 QRectF Part::boundingRect() const
