@@ -27,7 +27,7 @@ QPainterPath ToggleButton::symbolPainterPath(QRect limits)
     return QPainterPath();
 }
 
-void ToggleButton::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
+void ToggleButton::partClickedEvent()
 {
     m_toggleState = !m_toggleState;
     if(m_toggleState)
@@ -41,5 +41,4 @@ void ToggleButton::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
         m_brushColorSelected = Qt::GlobalColor::red;
     }
     update();
-    Part::mouseDoubleClickEvent(event);
 }

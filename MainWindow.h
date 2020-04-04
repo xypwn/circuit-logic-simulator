@@ -2,15 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QGraphicsScene>
-#include <QToolButton>
-#include <QUndoStack>
-#include <QUndoView>
-#include <QPushButton>
 #include "eConnectorType.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
+class QToolButton;
+class QUndoView;
+class QPushButton;
 QT_END_NAMESPACE
 
 class Connector;

@@ -2,6 +2,7 @@
 
 #include <QPainter>
 #include <qdebug.h>
+
 #include "Connector.h"
 #include "eConnectorType.h"
 

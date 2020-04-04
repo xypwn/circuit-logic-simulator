@@ -3,6 +3,7 @@
 
 #include <QGraphicsItem>
 #include <QList>
+
 #include "eConnectorType.h"
 
 class Part;

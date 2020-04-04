@@ -3,7 +3,6 @@
 
 #include <QGraphicsItem>
 #include <QList>
-#include <QLineEdit>
 
 #include "ePartType.h"
 
@@ -59,9 +58,6 @@ public:
 
     void setWidth(int factor);
 
-    void addText(); //TODO
-    void addTextEdit(); //TODO
-
     void recalculateLayout();
 
     virtual QRectF boundingRect() const override;
@@ -70,7 +66,7 @@ public:
     // Symbol to be drawn inside the circuitItem
     virtual QPainterPath symbolPainterPath(QRect limits) = 0;
     virtual QVariant itemChange(GraphicsItemChange change, const QVariant & value) override;
-    // Take the inputs and calculate the outputs based on the part's logic
+    // Takes the inputs and calculates the outputs based on the part's logic
     virtual QVector<bool> compute(QVector<bool> inputs) = 0;
 
 protected:
@@ -87,11 +83,16 @@ protected:
 
     CircuitItemBaseShape m_baseShape;
 
-    QPointF m_oldPos;
+    QPointF m_dragBeginPos;
 
     PartType::PartType m_partType;
 
     int m_widthFactor;
+
+    virtual void partClickedEvent(){}
+
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
 private:
     // Updates all of the outputs using the inputs, called by Logic

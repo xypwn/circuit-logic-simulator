@@ -5,7 +5,6 @@
 // This includes things like undo, redo, etc...
 
 #include <QGraphicsScene>
-#include <QUndoStack>
 
 #include "ePartType.h"
 #include "CircuitBuffer.h"
@@ -91,8 +90,8 @@ private:
     void connectorClicked(Connector *connector);
     // Removal is done undoably
     void removeConnectorsConnections(Connector *connector);
-
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+    // Called by Part when moved by mouse. Only called by the Part that was under the mouse pointer while moved
+    void partMoved(QPointF delta);
 };
 
 #endif // SCENE_H

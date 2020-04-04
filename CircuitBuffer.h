@@ -1,14 +1,14 @@
 #ifndef CIRCUITBUFFER_H
 #define CIRCUITBUFFER_H
 
-class Part;
-class Wire;
-class Scene;
-
 #include <QList>
 #include <QPointF>
 
 #include "ePartType.h"
+
+class Part;
+class Wire;
+class Scene;
 
 class CircuitBuffer
 {

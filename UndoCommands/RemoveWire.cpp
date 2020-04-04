@@ -4,7 +4,7 @@
 #include "../Logic.h"
 #include "../Wire.h"
 #include "../Part.h"
-#include "../Connector.h"\
+#include "../Connector.h"
 
 RemoveWire::RemoveWire(Scene* scene, Wire* wire)
     :m_scene(scene), m_wire(wire)

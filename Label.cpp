@@ -2,12 +2,12 @@
 
 #include <QKeyEvent>
 #include <QGraphicsScene>
+#include <QTextCursor>
 
 Label::Label(QGraphicsItem* parent)
     :m_parentItem(parent)
 {
-    // TODO: Find out why I have to call setParentItem each time in recalculateTextAlignment
-    //setParentItem((QGraphicsItem*)m_parent);
+    setParentItem((QGraphicsItem*)m_parentItem);
     if(parent->scene() != nullptr)
         parent->scene()->addItem(this);
 }
@@ -46,10 +46,16 @@ void Label::keyPressEvent(QKeyEvent* event)
         recalculateTextAlignment();
 }
 
+void Label::focusOutEvent(QFocusEvent* event)
+{
+    QTextCursor tc = textCursor();
+    tc.clearSelection();
+    setTextCursor(tc);
+    QGraphicsTextItem::focusOutEvent(event);
+}
+
 void Label::recalculateTextAlignment()
 {
-    setParentItem(m_parentItem);
-
     if(m_alignMode & AlignMode::Right)
         setX( - boundingRect().width());
     else if(m_alignMode & AlignMode::HCenter)

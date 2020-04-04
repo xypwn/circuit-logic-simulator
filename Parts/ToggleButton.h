@@ -14,9 +14,7 @@ public:
     QPainterPath symbolPainterPath(QRect limits) override;
 
 private:
-    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) override;
-
-    QPointF m_dragBeginPos;
+    void partClickedEvent() override;
 
     bool m_toggleState = false;
 };

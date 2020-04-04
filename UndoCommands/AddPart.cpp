@@ -1,14 +1,12 @@
 #include "AddPart.h"
 
-#include "RemoveWire.h"
-
 #include "../Part.h"
 #include "../Connector.h"
 #include "../Scene.h"
 #include "../Logic.h"
 #include "../Parts/IntegratedCircuit.h"
 
-#include <QDebug>
+#include "RemoveWire.h"
 
 AddPart::AddPart(Scene* scene, PartType::PartType partType, QPointF pos, QString icFilename)
     :m_scene(scene), m_partType(partType), m_pos(pos), m_icFilename(icFilename)

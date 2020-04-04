@@ -4,6 +4,7 @@
 #include "../Part.h"
 #include "../Connector.h"
 #include "../Logic.h"
+
 #include "RemoveWire.h"
 
 RemoveParts::RemoveParts(Scene* scene, const QList<Part*>& parts)

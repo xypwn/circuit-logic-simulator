@@ -9,6 +9,8 @@
 #include <QTimer>
 #include <QCloseEvent>
 #include <QDir>
+#include <QUndoView>
+#include <QPushButton>
 
 #include "Connector.h"
 #include "Connector.h"

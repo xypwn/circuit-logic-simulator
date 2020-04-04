@@ -7,16 +7,14 @@
 #include "Connector.h"
 #include "Wire.h"
 #include "Part.h"
+#include "FileHandler.h"
+#include "Logic.h"
 
 #include "UndoCommands/AddPart.h"
 #include "UndoCommands/AddWire.h"
 #include "UndoCommands/MoveParts.h"
 #include "UndoCommands/RemoveParts.h"
 #include "UndoCommands/RemoveWire.h"
-
-#include "FileHandler.h"
-
-#include "Logic.h"
 
 
 Scene::Scene(QGraphicsView *parentGfxView, MainWindow *parentMainWindow)
@@ -136,11 +134,6 @@ void Scene::removeWire(Wire* wire)
 void Scene::moveParts(const QList<Part *>& parts, QPointF relPos)
 {
     m_undoStack->push(new MoveParts(this, parts, relPos));
-
-    for(auto part : parts)
-    {
-        part->m_oldPos = part->pos();
-    }
 
     m_parentMainWindow->changeMade();
 }
@@ -263,18 +256,11 @@ void Scene::removeConnectorsConnections(Connector *connector)
     }
 }
 
-void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+void Scene::partMoved(QPointF delta)
 {
-    if (event->button() == Qt::LeftButton)
-    {
-        QList<QGraphicsItem*> movedItems = selectedItems();
-        if(!movedItems.isEmpty() && !(((Part*)movedItems[0])->pos() == ((Part*)movedItems[0])->m_oldPos))
-        {
-            QList<Part*> movedParts;
-            for(auto item : movedItems)
-                movedParts.append((Part*)item);
-            moveParts(movedParts, movedParts[0]->pos() - movedParts[0]->m_oldPos);
-        }
-    }
-    QGraphicsScene::mouseReleaseEvent(event);
+    QList<QGraphicsItem*> movedItems = selectedItems();
+    QList<Part*> movedParts;
+    for(auto item : movedItems)
+        movedParts.append((Part*)item);
+    moveParts(movedParts, delta);
 }

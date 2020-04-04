@@ -4,6 +4,7 @@
 #include <QTextStream>
 #include <QFile>
 #include <QDir>
+
 #include "Scene.h"
 #include "Part.h"
 #include "Wire.h"
@@ -13,8 +14,6 @@
 #include "Label.h"
 
 #include "Parts/IntegratedCircuit.h"
-
-#include <QDebug>
 
 FileHandler::FileHandler(Logic* logic)
     :m_logic(logic)
@@ -74,11 +73,12 @@ bool FileHandler::open(QString filename)
 
     enum Sector
     {
+        None,
         Parts,
         Wires
     };
 
-    Sector currentSector;
+    Sector currentSector = None;
 
     // A .csim file stores all parts with IDs, this map simply keeps track of which ID corresponds to which pointer
     QMap<QString, Part*> idPartPointerMap;
@@ -114,6 +114,9 @@ bool FileHandler::open(QString filename)
             words.last().remove(words.last().length() - 1, 1);
 
             if(words.length() < 4)
+                return false;
+
+            if(currentSector == None)
                 return false;
 
             if(currentSector == Parts)

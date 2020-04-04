@@ -79,7 +79,6 @@ IntegratedCircuit* Logic::createIC(QString filename, QPointF pos)
         m_parentScene->addItem(ic);
     m_parts.append(ic);
     ic->setPos(pos);
-    ic->m_oldPos = pos;
     ic->m_partType = PartType::IntegratedCircuit;
     return ic;
 }
@@ -117,7 +116,6 @@ Part* Logic::createPart(PartType::PartType partType, QPointF pos)
         m_parentScene->addItem(part);
     m_parts.append(part);
     part->setPos(pos);
-    part->m_oldPos = pos;
     part->m_partType = partType;
 
     return part;

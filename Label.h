@@ -6,6 +6,10 @@
 
 #include "eAlignMode.h"
 
+QT_BEGIN_NAMESPACE
+class QFocusEvent;
+QT_END_NAMESPACE
+
 class Label : private QGraphicsTextItem
 {
 public:
@@ -23,7 +27,7 @@ private:
     AlignMode::AlignMode m_alignMode;
 
     void keyPressEvent(QKeyEvent* event) override;
-
+    void focusOutEvent(QFocusEvent* event) override;
     void recalculateTextAlignment();
 };
 

@@ -1,12 +1,11 @@
 #include "Part.h"
 
-#include <QDebug>
-
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
 #include <QGraphicsSceneDragDropEvent>
 #include <QLabel>
 #include <QGraphicsProxyWidget>
+#include <QtMath>
 
 #include "eAlignMode.h"
 #include "eConnectorType.h"
@@ -15,8 +14,6 @@
 #include "Scene.h"
 #include "Logic.h"
 #include "Label.h"
-
-#include <QDebug>
 
 // PUBLIC
 Part::Part(Logic* logic, CircuitItemBaseShape baseShape)
@@ -91,7 +88,7 @@ void Part::setWidth(int factor)
 
 void Part::recalculateLayout()
 {
-    // Return if the part isn't in any scene
+    // No need to recalculate any graphical things if this part isn't in any scene
     if(m_logic->parentScene() == nullptr)
         return;
     // Add inputs and outputs and position them correctly
@@ -213,6 +210,27 @@ QVariant Part::itemChange(GraphicsItemChange change, const QVariant & value)
             o->update();
     }
     return QGraphicsItem::itemChange(change, value);
+}
+
+// PROTECTED
+void Part::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    m_dragBeginPos = event->screenPos();
+    QGraphicsItem::mousePressEvent(event);
+}
+
+void Part::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    QPointF deltaPos = event->screenPos() - m_dragBeginPos;
+    qreal dist = qSqrt(deltaPos.x()*deltaPos.x() + deltaPos.y()*deltaPos.y());
+    if(dist <= 5)
+    {
+        partClickedEvent();
+        return;
+    }
+    if(m_logic->parentScene() != nullptr)
+        m_logic->parentScene()->partMoved(deltaPos);
+    QGraphicsItem::mouseReleaseEvent(event);
 }
 
 // PRIVATE
